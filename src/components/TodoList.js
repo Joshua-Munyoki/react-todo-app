@@ -20,14 +20,10 @@ export default class TodoList extends Component {
     listTodos(input){
         let updateList = this.state.list;
         updateList.push(input);
-
-        let updateId = this.state.list.length;
         
         this.setState({
             list: updateList,
-            id: updateId,
-            userInput: ""
-            
+            userInput: "" 
         })
         console.log()
     }
@@ -55,7 +51,7 @@ export default class TodoList extends Component {
                     {this.state.list.map( (eachTodo, index)=>(
                         <li key={index}>
                             {eachTodo}{index}
-                            <button onClick={()=> this.handleDelete(eachTodo)}>Delete</button>
+                            <button onClick={()=> this.handleDelete(eachTodo)}>Done</button>
                         </li>
                     ))}
                 </ul>
