@@ -6,7 +6,8 @@ export default class TodoList extends Component {
 
         this.state = {
             userInput: "",
-            list: []
+            list: [],
+            id:[]
         }
     }
 
@@ -19,9 +20,23 @@ export default class TodoList extends Component {
     listTodos(input){
         let updateList = this.state.list;
         updateList.push(input);
+
+        let updateId = this.state.list.length;
+        
         this.setState({
             list: updateList,
-            userInput:""
+            id: updateId,
+            userInput: ""
+            
+        })
+        console.log()
+    }
+
+    handleDelete(input){
+        const remainingTodos = this.state.list.filter(currentTodo => currentTodo !== input)
+
+        this.setState({
+            list:remainingTodos,
         })
     }
  
@@ -36,9 +51,12 @@ export default class TodoList extends Component {
                     type="text"
                 />
                 <button onClick={() => this.listTodos(this.state.userInput)}>Add todo</button>
-                <ul>
-                    {this.state.list.map( (eachTodo)=>(
-                        <li>{eachTodo}</li>
+                <ul style={{listStyle: "none"}}>
+                    {this.state.list.map( (eachTodo, index)=>(
+                        <li key={index}>
+                            {eachTodo}{index}
+                            <button onClick={()=> this.handleDelete(eachTodo)}>Delete</button>
+                        </li>
                     ))}
                 </ul>
             </div>
